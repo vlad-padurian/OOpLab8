@@ -36,4 +36,10 @@ public:
         os << p.name << "(" << p.price << ")";
         return os;
     }
-};
+};template <typename Container>
+void printContainer(const Container& container) {
+    for (auto it = container.begin(); it != container.end(); ++it) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+}
