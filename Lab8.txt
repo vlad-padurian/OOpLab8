@@ -93,3 +93,111 @@ void splitEvenOdd(const std::vector<T>& source,
         }
     }
 }
+template <typename T>
+bool isPalindrome(const std::deque<T>& deq) {
+    if (deq.empty()) {
+        return true;
+    }
+
+    auto left = deq.begin();
+    auto right = deq.end();
+    --right;
+
+    while (left < right) {
+        if (*left != *right) {
+            return false;
+        }
+
+        ++left;
+        --right;
+    }
+
+    return true;
+}
+
+int main() {
+    std::cout << "Task 1. Merge std::array" << std::endl;
+
+    std::array<int, 4> arr1 = {1, 3, 5, 7};
+    std::array<int, 4> arr2 = {2, 4, 6, 8};
+
+    auto mergedInt = mergeArrays(arr1, arr2);
+
+    std::cout << "First array: ";
+    printContainer(arr1);
+
+    std::cout << "Second array: ";
+    printContainer(arr2);
+
+    std::cout << "Merged array: ";
+    printContainer(mergedInt);
+
+    std::array<Product, 3> products1 = {
+        Product("Garage", 50),
+        Product("Room", 100),
+        Product("Flat", 300)
+    };
+
+    std::array<Product, 3> products2 = {
+        Product("Studio", 200),
+        Product("House", 700),
+        Product("Villa", 900)
+    };
+
+    auto mergedProducts = mergeArrays(products1, products2);
+
+    std::cout << "Merged Product array: ";
+    printContainer(mergedProducts);
+
+
+    std::cout << std::endl;
+    std::cout << "Task 2. Split std::vector" << std::endl;
+
+    std::vector<int> numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    std::vector<int> evenNumbers;
+    std::vector<int> oddNumbers;
+
+    splitEvenOdd(numbers, evenNumbers, oddNumbers);
+
+    std::cout << "Original vector: ";
+    printContainer(numbers);
+
+    std::cout << "Even numbers: ";
+    printContainer(evenNumbers);
+
+    std::cout << "Odd numbers: ";
+    printContainer(oddNumbers);
+
+
+    std::cout << std::endl;
+    std::cout << "Task 3. Check std::deque palindrome" << std::endl;
+
+    std::deque<int> dequeInt = {1, 2, 3, 2, 1};
+    std::deque<char> dequeChar = {'a', 'b', 'b', 'a'};
+    std::deque<Product> dequeProduct = {
+        Product("Room", 100),
+        Product("Flat", 300),
+        Product("Room", 100)
+    };
+
+    std::cout << "Deque int: ";
+    printContainer(dequeInt);
+
+    std::cout << "Is palindrome: ";
+    std::cout << (isPalindrome(dequeInt) ? "Yes" : "No") << std::endl;
+
+    std::cout << "Deque char: ";
+    printContainer(dequeChar);
+
+    std::cout << "Is palindrome: ";
+    std::cout << (isPalindrome(dequeChar) ? "Yes" : "No") << std::endl;
+
+    std::cout << "Deque Product: ";
+    printContainer(dequeProduct);
+
+    std::cout << "Is palindrome: ";
+    std::cout << (isPalindrome(dequeProduct) ? "Yes" : "No") << std::endl;
+
+    return 0;
+}
