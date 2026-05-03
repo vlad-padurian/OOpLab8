@@ -36,10 +36,60 @@ public:
         os << p.name << "(" << p.price << ")";
         return os;
     }
-};template <typename Container>
+};
+
+template <typename Container>
 void printContainer(const Container& container) {
     for (auto it = container.begin(); it != container.end(); ++it) {
         std::cout << *it << " ";
     }
     std::cout << std::endl;
+}
+template <typename T, size_t N1, size_t N2>
+std::array<T, N1 + N2> mergeArrays(const std::array<T, N1>& first,
+                                   const std::array<T, N2>& second) {
+    std::array<T, N1 + N2> result{};
+
+    auto it1 = first.begin();
+    auto it2 = second.begin();
+    auto itResult = result.begin();
+
+    while (it1 != first.end() && it2 != second.end()) {
+        if (*it1 < *it2) {
+            *itResult = *it1;
+            ++it1;
+        } else {
+            *itResult = *it2;
+            ++it2;
+        }
+
+        ++itResult;
+    }
+
+    while (it1 != first.end()) {
+        *itResult = *it1;
+        ++it1;
+        ++itResult;
+    }
+
+    while (it2 != second.end()) {
+        *itResult = *it2;
+        ++it2;
+        ++itResult;
+    }
+
+    return result;
+}
+
+template <typename T>
+void splitEvenOdd(const std::vector<T>& source,
+                  std::vector<T>& even,
+                  std::vector<T>& odd) {
+    for (auto it = source.begin(); it != source.end(); ++it) {
+        if (*it % 2 == 0) {
+            even.push_back(*it);
+        } else {
+            odd.push_back(*it);
+        }
+    }
 }
